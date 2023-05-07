@@ -74,4 +74,12 @@ pivot_table = pd.pivot_table(df, index=pivot_columns, columns= columns_name, val
 # Display the pivot table
 st.write(pivot_table)
 
+#To download pivot dataset
+def download_csv(pivot_table):
+    csv = pivot_table.to_csv(index=True)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="pivoted_dataset.csv">Download pivoted dataset</a>'
+    return href
+
+st.markdown(download_csv(pivot_table), unsafe_allow_html=True)
 
