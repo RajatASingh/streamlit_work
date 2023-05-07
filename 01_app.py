@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import plotly.express as ppx
 import streamlit as st
 
 st.header('Load & Analyse')
@@ -49,8 +50,29 @@ y_axis = st.selectbox('select a column name to set on y_axis', df.columns)
 chart_types = ['Bar chart', 'Line chart']
 selected_chart_type = st.selectbox('Select a chart type', chart_types)
 
+
 # Display the selected chart
 if selected_chart_type == 'Bar chart':
     st.bar_chart(data= df , x= x_axis , y= y_axis )
 elif selected_chart_type == 'Line chart':
     st.line_chart(data= df , x= x_axis , y= y_axis )
+
+
+
+
+# Create a selectbox for the columns to pivot on
+columns = list(df.columns)
+pivot_columns = st.multiselect('Select columns to pivot on', columns)
+columns_name = st.selectbox('Select field as column', columns)
+
+# Create a selectbox for the values to aggregate
+value_columns = st.selectbox('Select a value column to aggregate', columns)
+aggregate = st.selectbox( 'select a agggregate' ,[ 'sum' , 'mean'])
+
+# Pivot the dataframe based on user input
+pivot_table = pd.pivot_table(df, index=pivot_columns, columns= columns_name, values=value_columns, aggfunc= aggregate)
+
+# Display the pivot table
+st.write(pivot_table)
+
+
