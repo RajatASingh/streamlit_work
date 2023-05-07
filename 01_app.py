@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import base64
 
 st.set_page_config(layout='wide')
 st.header('Load & Analyse')
