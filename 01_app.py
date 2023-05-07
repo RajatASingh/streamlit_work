@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+st.set_page_config(layout='wide')
 st.header('Load & Analyse')
 st.markdown('This app will give you flexibility to upload the dataset and work with it withour writting a code')
 
